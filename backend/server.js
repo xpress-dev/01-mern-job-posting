@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import { connectDatabase } from "./config/db.js";
 import jobRoutes from "./routes/job.route.js";
 import path from "path";
-import { fileURLToPath } from "url";
 
 dotenv.config();
 
@@ -13,14 +12,15 @@ app.use(express.json());
 app.use("/api/jobs", jobRoutes);
 
 // Serve frontend static files
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const frontendDist = path.join(__dirname, "../frontend/dist");
-app.use(express.static(frontendDist));
-// Catch-all: serve React app for any non-API route
-app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.join(frontendDist, "index.html"));
-});
+
+const __dirname = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 
