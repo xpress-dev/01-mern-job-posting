@@ -1,0 +1,36 @@
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+frontend/dist/
+frontend/.vite/
+
+# dotenv environment variables
+.env
+.env.*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# VSCode settings
+.vscode/
+
+# Misc
+*.local
+*.sublime-workspace
+*.sublime-project
+.idea/
+
+# Optional: ignore coverage and test output
+coverage/
+*.lcov
+
+# Optional: ignore backend build output (if any)
+backend/build/
