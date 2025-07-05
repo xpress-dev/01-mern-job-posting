@@ -3,16 +3,15 @@ import Job from "../models/job.model.js";
 
 export const createJob = async (req, res) => {
   const job = req.body;
-  if (
-    !job.company ||
-    !job.name ||
-    !job.pay ||
-    !job.description ||
-    !job.postingImageUrl
-  ) {
+  if (!job.company || !job.name || !job.pay || !job.description) {
     return res
       .status(400)
-      .json({ success: false, message: "Please provide all fields." });
+      .json({ success: false, message: "Please provide all required fields." });
+  }
+  // If postingImageUrl is missing or empty, set default
+  if (!job.postingImageUrl || !job.postingImageUrl.trim()) {
+    job.postingImageUrl =
+      "https://www.insperity.com/wp-content/uploads/how-to-write-a-job-posting-1200x630-1.png";
   }
   try {
     const newJob = await Job.create(job);

@@ -45,6 +45,10 @@ nav {
   flex-wrap: wrap;
   min-height: 64px;
   gap: 12px;
+  /* Add a little more shadow and border for pop */
+  border: 1.5px solid #e0e7ff;
+  box-shadow: 0 6px 28px rgba(99, 102, 241, 0.1),
+    0 1.5px 6px rgba(0, 0, 0, 0.04);
 }
 @media (max-width: 700px) {
   nav {
@@ -59,7 +63,8 @@ nav {
     justify-content: center;
     margin-bottom: 6px;
   }
-  nav a:nth-child(2) {
+
+  .navBarButtonContainer a {
     text-align: center;
     font-size: 17px;
     padding: 10px 0;
@@ -67,10 +72,16 @@ nav {
     border-radius: 8px;
     box-shadow: none;
   }
+  .navBarButtonContainer button {
+    margin: 0 auto;
+    display: block;
+    width: 120px;
+    text-align: center;
+  }
 }
 
 .logoContainer,
-a {
+nav a {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -80,7 +91,7 @@ a {
   letter-spacing: 0.5px;
 }
 
-nav a:nth-child(2) {
+.navBarButtonContainer a {
   font-size: 18px;
   padding: 7px 22px;
   border-radius: 100px;
@@ -90,10 +101,41 @@ nav a:nth-child(2) {
   position: relative;
   overflow: hidden;
 }
-nav a:nth-child(2):hover {
+.navBarButtonContainer a:hover {
   background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
   transform: translateY(-2px) scale(1.045);
   box-shadow: 0 6px 20px rgba(99, 102, 241, 0.18);
+}
+
+nav button {
+  background: linear-gradient(90deg, #f43f5e 0%, #f59e42 100%);
+  color: #fff;
+  padding: 8px 22px;
+  border: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 auto;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.08);
+  transition: background 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100px;
+}
+nav button:hover {
+  background: linear-gradient(90deg, #f59e42 0%, #f43f5e 100%);
+  opacity: 0.95;
+  transform: translateY(-1px) scale(1.04);
+}
+
+.navBarButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
 .logoContainer svg {
@@ -207,7 +249,7 @@ article p {
   gap: 10px;
 }
 
-button {
+.buttonContainer button {
   padding: 10px 15px;
   font-size: 14px;
   border: none;
@@ -216,7 +258,7 @@ button {
   flex: 1; /* Make buttons equal width */
 }
 
-button:hover {
+.buttonContainer button:hover {
   opacity: 0.8;
   transform: translateY(-1px);
 }
@@ -370,6 +412,87 @@ button:hover {
   text-align: left;
   padding: 10px 0;
   grid-column: 1 / -1; /* Span all columns */
+}
+
+/* Admin Login Page Styling */
+.login-page {
+  max-width: 400px;
+  margin: 60px auto 0 auto;
+  padding: 32px 28px 24px 28px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px rgba(99, 102, 241, 0.1),
+    0 1.5px 6px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-page h2 {
+  color: #222;
+  margin-bottom: 28px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-bottom: 3px solid #6366f1;
+  padding-bottom: 12px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.login-page input[type="text"],
+.login-page input[type="password"] {
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  background: #f8fafc;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.login-page input[type="text"]:focus,
+.login-page input[type="password"]:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: #fff;
+  box-shadow: 0 0 0 2px #6366f133;
+}
+
+.login-page button[type="submit"] {
+  background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+  color: #fff;
+  padding: 13px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+  margin-top: 8px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.login-page button[type="submit"]:hover {
+  background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
+  transform: translateY(-1px) scale(1.01);
+}
+
+.login-page .error {
+  color: #f44336;
+  font-size: 16px;
+  text-align: center;
+  background-color: #ffebee;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 8px;
 }
 
 /* Media Queries for Responsiveness */

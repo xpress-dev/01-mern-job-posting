@@ -20,7 +20,9 @@ const jobSchema = new mongoose.Schema(
     },
     postingImageUrl: {
       type: String,
-      required: true,
+      required: false,
+      default:
+        "https://www.insperity.com/wp-content/uploads/how-to-write-a-job-posting-1200x630-1.png",
     },
   },
   {

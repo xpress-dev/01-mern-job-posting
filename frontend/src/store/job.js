@@ -32,6 +32,7 @@ export const useJobStore = create((set) => ({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
         },
         body: JSON.stringify(newJob),
       });
@@ -77,6 +78,9 @@ export const useJobStore = create((set) => ({
     try {
       const res = await fetch(`/api/jobs/${jid}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+        },
       });
       const data = await res.json();
 
@@ -106,6 +110,7 @@ export const useJobStore = create((set) => ({
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
         },
         body: JSON.stringify(updatedJob),
       });

@@ -2,6 +2,8 @@
 import React from "react";
 
 const JobCard = ({ job, handleRemove, handleEdit }) => {
+  const isLoggedIn = !!localStorage.getItem("token");
+
   return (
     <article>
       <div className="imageContainer">
@@ -13,14 +15,19 @@ const JobCard = ({ job, handleRemove, handleEdit }) => {
       <p>{job.description}</p>
 
       {/* Edit and Remove Buttons */}
-      <div className="buttonContainer">
-        <button className="editButton" onClick={() => handleEdit(job)}>
-          Edit
-        </button>
-        <button className="removeButton" onClick={() => handleRemove(job._id)}>
-          Remove
-        </button>
-      </div>
+      {isLoggedIn && (
+        <div className="buttonContainer">
+          <button className="editButton" onClick={() => handleEdit(job)}>
+            Edit
+          </button>
+          <button
+            className="removeButton"
+            onClick={() => handleRemove(job._id)}
+          >
+            Remove
+          </button>
+        </div>
+      )}
     </article>
   );
 };

@@ -1,7 +1,19 @@
 // src/components/EditModal.jsx
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
+const DEFAULT_IMAGE_URL =
+  "https://www.insperity.com/wp-content/uploads/how-to-write-a-job-posting-1200x630-1.png";
 
 const EditModal = ({ editJob, setEditJob, handleUpdateJob }) => {
+  // State for conditional image input
+  const [showImageInput, setShowImageInput] = useState(
+    !!editJob.postingImageUrl && editJob.postingImageUrl !== DEFAULT_IMAGE_URL
+  );
+  const [imageUrl, setImageUrl] = useState(
+    editJob.postingImageUrl && editJob.postingImageUrl !== DEFAULT_IMAGE_URL
+      ? editJob.postingImageUrl
+      : ""
+  );
   useEffect(() => {
     // Disable scrolling on mount
     const originalOverflow = document.body.style.overflow;
@@ -62,12 +74,17 @@ const EditModal = ({ editJob, setEditJob, handleUpdateJob }) => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
+            let postingImageUrl = imageUrl;
+            if (!showImageInput || !postingImageUrl.trim()) {
+              postingImageUrl = DEFAULT_IMAGE_URL;
+            }
             const updatedJob = {
               ...editJob,
               name: e.target.name.value,
               pay: e.target.pay.value,
               description: e.target.description.value,
               company: e.target.company.value,
+              postingImageUrl,
             };
             handleUpdateJob(updatedJob);
           }}
@@ -95,6 +112,41 @@ const EditModal = ({ editJob, setEditJob, handleUpdateJob }) => {
             defaultValue={editJob.description}
             placeholder="Description"
           />
+          <div className="form-group" style={{ marginBottom: 0 }}>
+            <label>
+              <input
+                type="checkbox"
+                checked={showImageInput}
+                onChange={(e) => {
+                  setShowImageInput(e.target.checked);
+                  if (!e.target.checked) setImageUrl("");
+                }}
+                style={{
+                  width: 18,
+                  height: 18,
+                  accentColor: "#6366f1",
+                  marginRight: 8,
+                }}
+              />
+              I have an image for the job posting.
+            </label>
+          </div>
+
+          {showImageInput && (
+            <div className="form-group">
+              <label htmlFor="edit-postingImageUrl">Posting Image URL</label>
+              <input
+                type="url"
+                id="edit-postingImageUrl"
+                name="postingImageUrl"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                placeholder="Enter image URL"
+                style={{ borderColor: "#6366f1" }}
+              />
+            </div>
+          )}
+
           <button type="submit">Save</button>
           <button type="button" onClick={() => setEditJob(null)}>
             Cancel

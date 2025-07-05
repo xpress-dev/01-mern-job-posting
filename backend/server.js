@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { connectDatabase } from "./config/db.js";
 import jobRoutes from "./routes/job.route.js";
+import authRoutes from "./routes/auth.route.js";
 import path from "path";
 
 dotenv.config();
@@ -10,6 +11,7 @@ const app = express();
 
 app.use(express.json());
 app.use("/api/jobs", jobRoutes);
+app.use("/api/auth", authRoutes);
 
 // Serve frontend static files
 
